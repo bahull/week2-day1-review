@@ -56,17 +56,21 @@ class App extends Component {
         <PeopleList
           key={index}
           person={curr}
-          handleConfirm={this.handleConfirm}
+          handleChange={this.handleConfirm}
+          currClass={"select"}
+          teamText={"Add to team"}
         />
       );
     });
 
     let pickedList = picked.map((curr, index) => {
       return (
-        <PickedList
+        <PeopleList
           key={index}
           person={curr}
-          deletePicked={this.deletePicked}
+          handleChange={this.deletePicked}
+          currClass={"remove"}
+          teamText={"Remove from team"}
         />
       );
     });
@@ -85,11 +89,7 @@ class App extends Component {
 
           <section class="flexed">
             <h4>Current Team</h4>
-            {pickedList.length > 0 ? (
-              pickedList
-            ) : (
-              <h5 style={{ color: "red" }}>Select a teamate</h5>
-            )}
+            {pickedList}
           </section>
         </div>
       </div>

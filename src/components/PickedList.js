@@ -6,8 +6,11 @@ function PickedList(props) {
     <div class="card">
       <div>{props.person.name}</div>
       <div>{props.person.age}</div>
-      <button class="remove" onClick={() => props.deletePicked(props.person)}>
-        Remove from team
+      <button
+        class={props.currClass}
+        onClick={() => props.handleChange(props.person)}
+      >
+        {props.teamText}
       </button>
     </div>
   );
