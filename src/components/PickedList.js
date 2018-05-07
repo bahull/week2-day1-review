@@ -3,14 +3,14 @@ import "./peoples.css";
 
 function PickedList(props) {
   return (
-    <div class="card">
+    <div className="card">
       <div>{props.person.name}</div>
       <div>{props.person.age}</div>
       <button
-        class={props.currClass}
-        onClick={() => props.handleChange(props.person)}
+        className="remove"
+        onClick={() => props.deletePicked(props.person)}
       >
-        {props.teamText}
+        Remove from team
       </button>
     </div>
   );

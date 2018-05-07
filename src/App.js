@@ -25,7 +25,10 @@ class App extends Component {
     //Creates a copy of the people array. Take the chosen person out of the array
     let peopleCopy = this.state.people.slice();
 
-    peopleCopy.splice(peopleCopy.indexOf(person), 1);
+    peopleCopy.splice(
+      peopleCopy.findIndex(curr => curr.name === person.name),
+      1
+    );
 
     //Creates a copy of the picked array. Pushes in chosen person into the array
     let pickedCopy = this.state.picked.slice();
@@ -37,10 +40,14 @@ class App extends Component {
     });
   }
   deletePicked(person) {
+    console.log(person);
     //Creates a copy of the people array. Take the chosen person out of the array
     let pickedCopy = this.state.picked.slice();
 
-    pickedCopy.splice(pickedCopy.indexOf(person), 1);
+    pickedCopy.splice(
+      pickedCopy.findIndex(curr => curr.name === person.name),
+      1
+    );
 
     //Creates a copy of the picked array. Pushes in chosen person into the array
     this.setState({
@@ -56,21 +63,21 @@ class App extends Component {
         <PeopleList
           key={index}
           person={curr}
-          handleChange={this.handleConfirm}
-          currClass={"select"}
-          teamText={"Add to team"}
+          handleConfirm={this.handleConfirm}
+          // currClass={"select"}
+          // teamText={"Add to team"}
         />
       );
     });
 
     let pickedList = picked.map((curr, index) => {
       return (
-        <PeopleList
+        <PickedList
           key={index}
           person={curr}
-          handleChange={this.deletePicked}
-          currClass={"remove"}
-          teamText={"Remove from team"}
+          deletePicked={this.deletePicked}
+          // currClass={"remove"}
+          // teamText={"Remove from team"}
         />
       );
     });
@@ -81,13 +88,13 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Team Options</h1>
         </header>
-        <div class="flex-row">
-          <section class="flexed">
+        <div className="flex-row">
+          <section className="flexed">
             <h4>Team Options</h4>
             {peopleList}
           </section>
 
-          <section class="flexed">
+          <section className="flexed">
             <h4>Current Team</h4>
             {pickedList}
           </section>

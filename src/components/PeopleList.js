@@ -3,14 +3,14 @@ import "./peoples.css";
 
 function PeopleList(props) {
   return (
-    <div class="card">
+    <div className="card">
       <div>{props.person.name}</div>
       <div>{props.person.age}</div>
       <button
-        class={props.currClass}
-        onClick={() => props.handleChange(props.person)}
+        className="select"
+        onClick={() => props.handleConfirm(props.person)}
       >
-        {props.teamText}
+        Add to Team
       </button>
     </div>
   );
