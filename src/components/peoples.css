@@ -1,0 +1,17 @@
+.card {
+  background: lightgray;
+  width: 95%;
+  height: 40px;
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+}
+.select {
+  background: lightblue;
+  cursor: pointer;
+}
+.remove {
+  background: lightcoral;
+  cursor: pointer;
+}

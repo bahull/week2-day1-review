@@ -1,0 +1,100 @@
+import React, { Component } from "react";
+import PeopleList from "./components/PeopleList";
+import PickedList from "./components/PickedList";
+import logo from "./logo.svg";
+import "./App.css";
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      people: [
+        { name: "Bryce", age: 24 },
+        { name: "Shea", age: "Not 24" },
+        { name: "Steven", age: 25 },
+        { name: "Erik", age: "No idea" },
+        { name: "Zac", age: 19 }
+      ],
+      picked: []
+    };
+    this.handleConfirm = this.handleConfirm.bind(this);
+    this.deletePicked = this.deletePicked.bind(this);
+  }
+
+  handleConfirm(person) {
+    //Creates a copy of the people array. Take the chosen person out of the array
+    let peopleCopy = this.state.people.slice();
+
+    peopleCopy.splice(peopleCopy.indexOf(person), 1);
+
+    //Creates a copy of the picked array. Pushes in chosen person into the array
+    let pickedCopy = this.state.picked.slice();
+    pickedCopy.push(person);
+
+    this.setState({
+      people: peopleCopy,
+      picked: pickedCopy
+    });
+  }
+  deletePicked(person) {
+    //Creates a copy of the people array. Take the chosen person out of the array
+    let pickedCopy = this.state.picked.slice();
+
+    pickedCopy.splice(pickedCopy.indexOf(person), 1);
+
+    //Creates a copy of the picked array. Pushes in chosen person into the array
+    this.setState({
+      picked: pickedCopy
+    });
+  }
+
+  render() {
+    const { people, picked } = this.state;
+    // console.log(picked);
+    let peopleList = people.map((curr, index) => {
+      return (
+        <PeopleList
+          key={index}
+          person={curr}
+          handleConfirm={this.handleConfirm}
+        />
+      );
+    });
+
+    let pickedList = picked.map((curr, index) => {
+      return (
+        <PickedList
+          key={index}
+          person={curr}
+          deletePicked={this.deletePicked}
+        />
+      );
+    });
+
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Team Options</h1>
+        </header>
+        <div class="flex-row">
+          <section class="flexed">
+            <h4>Team Options</h4>
+            {peopleList}
+          </section>
+
+          <section class="flexed">
+            <h4>Current Team</h4>
+            {pickedList.length > 0 ? (
+              pickedList
+            ) : (
+              <h5 style={{ color: "red" }}>Select a teamate</h5>
+            )}
+          </section>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default App;
