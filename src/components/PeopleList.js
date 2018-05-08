@@ -7,10 +7,10 @@ function PeopleList(props) {
       <div>{props.person.name}</div>
       <div>{props.person.age}</div>
       <button
-        className="select"
+        className={props.currClass}
         onClick={() => props.handleConfirm(props.person)}
       >
-        Add to Team
+        {props.text}
       </button>
     </div>
   );

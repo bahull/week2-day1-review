@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PeopleList from "./components/PeopleList";
-import PickedList from "./components/PickedList";
 import logo from "./logo.svg";
 import "./App.css";
 
@@ -24,11 +23,8 @@ class App extends Component {
   handleConfirm(person) {
     //Creates a copy of the people array. Take the chosen person out of the array
     let peopleCopy = this.state.people.slice();
-
-    peopleCopy.splice(
-      peopleCopy.findIndex(curr => curr.name === person.name),
-      1
-    );
+    let currIndex = peopleCopy.findIndex(curr => curr.name === person.name);
+    peopleCopy.splice(currIndex, 1);
 
     //Creates a copy of the picked array. Pushes in chosen person into the array
     let pickedCopy = this.state.picked.slice();
@@ -57,27 +53,27 @@ class App extends Component {
 
   render() {
     const { people, picked } = this.state;
-    // console.log(picked);
+
     let peopleList = people.map((curr, index) => {
       return (
         <PeopleList
           key={index}
           person={curr}
           handleConfirm={this.handleConfirm}
-          // currClass={"select"}
-          // teamText={"Add to team"}
+          currClass={"select"}
+          text={"Add to team"}
         />
       );
     });
 
     let pickedList = picked.map((curr, index) => {
       return (
-        <PickedList
+        <PeopleList
           key={index}
           person={curr}
-          deletePicked={this.deletePicked}
-          // currClass={"remove"}
-          // teamText={"Remove from team"}
+          handleConfirm={this.deletePicked}
+          currClass={"remove"}
+          text={"Remove from team"}
         />
       );
     });
@@ -86,7 +82,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Team Options</h1>
+          <h1 className="App-title">Team Builder</h1>
         </header>
         <div className="flex-row">
           <section className="flexed">
